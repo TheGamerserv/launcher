@@ -1,0 +1,31 @@
+{
+  "name": "thegamerserv",
+  "version": "1.0.0",
+  "description": "launcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron .",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "author": "The Gamer serv, Inc.",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^15.3.1",
+    "electron-builder": "^22.13.1"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "custom-electron-titlebar": "^3.2.7",
+    "electron-updater": "^4.3.9",
+    "minecraft-launcher-core": "^3.16.8"
+  },
+  "build": {
+    "appId": "com.thegamerserv.launcher",
+    "icon": "asset/icon.ico"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/TheGamerserv/launcher.git"
+  }
+}

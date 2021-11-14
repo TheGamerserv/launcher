@@ -1,0 +1,28 @@
+%!Adobe-FontList 1.20
+%Locale:0x40c
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:MMHeadlineProWebTT-Regular
+FamilyName:MM Headline Pro WebTT
+StyleName:Regular
+FullName:MM Headline Pro WebTT Regular Regular
+MenuName:MM Headline Pro WebTT Regular
+StyleBits:3
+WritingScript:Roman
+OutlineFileName:D:\dev\launcher\asset\Font\title.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:125320
+FileModTime:1610577102
+WeightClass:800
+WidthClass:3
+AngleClass:1
+NameArray:0,Mac,18,MM Headline Pro WebTT Regular
+NameArray:0,Mac,4,MM Headline Pro WebTT Regular Regular
+NameArray:0,Win,1,MM Headline Pro WebTT Regular
+NameArray:0,Win,16,MM Headline Pro WebTT
+%EndFont
+

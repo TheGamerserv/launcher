@@ -1,0 +1,101 @@
+<!--
+  Sources utilisées:
+  - IziToast
+  - Colorlib
+-->
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./update.css" />
+  </head>
+
+  <body>
+      <img src="./asset/login_logo.png" />
+    <div class="login-page">
+        <p>Recherche de Mise à jour...</p>
+      </div>
+    </div>
+
+    <style>
+
+      body {
+          background: #202020;
+          -webkit-app-region: drag;
+          font-family: "Roboto", sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          background-size: 100%;
+          }
+
+    </style>
+
+<script>
+      
+    const ipc = require("electron").ipcRenderer;
+
+    let playbtn = document.getElementById("login");
+
+    playbtn.addEventListener("click", () => {
+      let user = document.getElementById("username").value;
+      let pass = document.getElementById("password").value;
+
+      if (user && pass) {
+        ipc.send("login", { user, pass });
+      } else {
+        playbtn.disable = false;
+        iziToast.error({
+        id: "err",
+        title: "Erreur",
+        message: "entrez un mail et/ou mot de passe",
+        position: "bottomRight",
+        transitionIn: "fadeInDown",
+      });
+      }
+    });
+
+    // Récéption de l'event erreur
+    ipc.on("err", (event, errorMessage) => {
+      iziToast.error({
+        id: "error",
+        title: "Erreur",
+        message: errorMessage,
+        position: "bottomRight",
+        transitionIn: "fadeInDown",
+
+      });
+
+      playbtn.disabled = false;
+
+    });
+
+    const notification = document.getElementById('notification');
+    const message = document.getElementById('message');
+    const restartButton = document.getElementById('restart-button');
+
+    ipcRenderer.on('update_available', () => {
+    ipcRenderer.removeAllListeners('update_available');
+    message.innerText = 'A new update is available. Downloading now...';
+    notification.classList.remove('hidden');
+    });
+
+    ipcRenderer.on('update_downloaded', () => {
+    ipcRenderer.removeAllListeners('update_downloaded');
+    message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+    restartButton.classList.remove('hidden');
+    notification.classList.remove('hidden');
+    });
+
+    function closeNotification() {
+    notification.classList.add('hidden');
+    }
+    function restartApp() {
+  ipcRenderer.send('restart_app');
+}
+
+  </script>
+
+  </body>
+
+</html>

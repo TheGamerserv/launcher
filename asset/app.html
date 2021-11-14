@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="asset/main.css" />
+    <link rel="stylesheet" href="asset/toast.css" />
+    <script src="asset/toast.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+          <nav class="menueffect">
+            <a class="selectpage"href="./news.html">News</a>
+            <a class="selectpage" href="./season.html">Saison</a>
+            <a class="selectpage" href="./app.html">Jouer</a>
+            <a class="selectpage" href="./shop.html">Boutique</a>
+            <div class="line"></div>
+          </nav>
+  </nav>
+  <div class="choose-server">
+    <a class="server-shadow" href="./shadow.html"> Shadow Pix </a>
+  </div>
+
+  <div class="settings" id="settingsbtn">
+    <i class="fas fa-cog"></i>
+  </div>
+    <section id="news">
+      <img src="./asset/logow.png" />
+    </section>
+    
+    <button class="play"  id="play" type="submit"> 
+      JOUER
+  </button>
+
+    <style>
+      body {
+background: #222;
+/* fallback for old browsers */
+background: url("./asset/gs_fond_s11.png");
+background-repeat: no-repeat;
+font-family: "Roboto", sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+      
+    </style>
+    <script>
+      
+      const ipc = require("electron").ipcRenderer;
+
+
+      let btnplay = document.getElementById("play");
+
+      let btnset = document.getElementById("settingsbtn");
+
+      btnplay.addEventListener('click', () => {
+        event.preventDefault();
+        ipc.send('play', JSON.parse(localStorage.getItem('user')))
+        btnplay.disabled = true;
+        setTimeout( () => {
+          btnplay.disabled = false;
+    }, 30000);
+        iziToast.success({
+          title: 'Minecraft',
+          message: 'Lancement du Jeu en cours'
+        });
+      });
+
+      btnset.addEventListener('click', () => {
+        event.preventDefault();
+
+        iziToast.info({
+          title: 'INDISPONIBLE',
+          message: 'Les paramètres sont indisponible'
+        });
+      });
+
+      // Récéption de l'event erreur
+      ipc.on("err", (event, errorMessage) => {
+        iziToast.error({
+          id: "error",
+          title: "Erreur",
+          message: errorMessage,
+          position: "bottomRight",
+          transitionIn: "fadeInDown",
+
+        });
+
+        btnplay.disabled = false;
+
+      });
+
+      ipc.on("user",(event, user) => {
+          localStorage.setItem("user", JSON.stringify(user));
+          iziToast.success({
+          title: "Connecter",
+          message: 'Bienvenue' + user.name,
+          position: "bottomRight",
+          transitionIn: "fadeInDown",
+        });
+        });
+
+        ipc.on("launchgame",(event) => {
+          iziToast.success({
+          title: "Succès",
+          message: "Le jeu à été lancé...",
+          position: "bottomRight",
+          transitionIn: "fadeInDown",
+        });
+        btnplay.disabled = false;
+        btnplay.innerHTML = "JOUER"
+        });
+
+
+        ipc.on("download",(event) => {
+          btnplay.innerHTML = "Téléchargement..."
+        });
+
+        ipc.on("done",(event) => {
+          btnplay.innerHTML = "Vérification..."
+        });
+
+    </script>
+    <script src="https://kit.fontawesome.com/5770dcb58a.js" crossorigin="anonymous"></script>
+  </body>
+</html>

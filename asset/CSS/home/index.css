@@ -1,0 +1,13 @@
+body {
+    background: #444444;
+    margin: 0;
+    padding: 0;
+}
+
+
+.header-home {
+    margin-top: -12px;
+    height: 70px;
+    width: 100%;
+    background: #282828;
+}

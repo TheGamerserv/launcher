@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="asset/navbar.css" />
+    <link rel="stylesheet" href="asset/toast.css" />
+    <script src="asset/toast.js"></script>
+  </head>
+
+  <body>
+  <div class="navbar-vertical">
+    <img src="asset/logow.png">
+    <br>
+    <div class="navbar-content-vert">
+      <a class="selectpage btnhome" href="./app-dev.html">
+        <div class="link-navbar">
+          <p>Accueil</p>
+        </div></a>
+
+      <a class="selectpage" href="">
+          <div class="link-navbar">
+            <p>News</p>
+          </div></a>
+
+      <a class="selectpage" href="">
+            <div class="link-navbar">
+              <p>Boutique</p>
+            </div></a>
+
+    </div>
+  </div>
+</div>  
+  <nav class="navbar-horizontal">
+            <div class="navbar-hor-text">
+            <p class="text-nav-hor">Mon compte</p>
+            <img src="asset/img/profil/default.png">
+            </div>
+  </nav>
+
+  <div class="content-shadow">
+    <img class="img-ban-shadow" src="asset/img/ban/shadow-ban.jpg">
+    <div class="contentsmall-shadow">
+        <img class="shadow-logo" src="asset/img/shadow_logo.png">
+        <div class="btn-asset">
+          <div id="shadow-btn-play" class="download-btn"><p>Jouer</p></div>
+          <div id="shadow-btn-settings" class="settings-btn"><img src="asset/btn/settings_Plan de travail 1.png"></div>
+        </div>
+        <div class="desc-content">
+          <h1>Description</h1>
+          <p>ShadowPix est un serveur PvP/Factions Moddé<br>
+            Vous pouvez y retrouver des mods que vous ne retrouverez pas dans d'autre serveur, pour essayer de proposer quelque chose de nouveau dans le PvP Factions (Système de guerre entres factions prévu)
+            Aussi ! Vous démarrez avec un full stuff en diamant Pioche hache et épée !!<br>
+            <br>
+            Enfin, voici des mods que vous ne trouverez qu'ici:<br>
+            Thermal, SecretRoom, Quark, Blocklings, Storage Drawers et plein d'autre !!<br>
+            Des totems Apparaissent qui vous permette de gagner des récompenses (Attention a votre Stuff) <br>
+            <br>
+            Vous êtes en manque de ressources ? Pas de problème ! Dans le spawn vous pouvez  obtenir des objets gratuit (Bois et autres ressources) avec des panneaux cachés dans le spawn !
+            N'hésitez pas à rejoindre notre serveur pour avoir accès à toutes ses choses et bien plus encore, les nouveaux membres seront toujours les bienvenus !</p>
+        </div>
+        <div class="other-photos">
+          <p>Quelques images !</p>
+        </div>
+        <div class="images-shadow">
+          <img src="asset/img/image/shadow-01.png">
+          <img src="asset/img/image/shadow-02.png">
+        </div>
+        <div class="images-shadow">
+          <img src="asset/img/image/shadow-03.png">
+          <img src="asset/img/image/shadow-04.png">
+        </div>
+        <div class="images-shadow">
+          <img src="asset/img/image/shadow-05.png">
+        </div>
+    </div>
+  </div>
+
+    <style>
+      body {
+        overflow-x: hidden;
+        margin: 0;
+        background: #333333;
+        font-family: "Roboto", sans-serif;
+      }
+
+      
+    </style>
+     <script>
+      
+      const ipc = require("electron").ipcRenderer;
+  
+      let shadowsettings = document.getElementById("shadow-btn-settings");
+      let shadowplay = document.getElementById("shadow-btn-play");
+      let btnhome = document.getElementById("btnhome");
+
+      shadowsettings.addEventListener("click", () => {
+        iziToast.warning({
+          title: 'Alerte',
+          message: 'services indisponible'
+        });
+      });
+
+      shadowplay.addEventListener("click", () => {
+          event.preventDefault();
+          ipc.send('play', JSON.parse(localStorage.getItem('user')));
+          shadowplay.disabled = true;
+          btnhome.disabled = true;
+          iziToast.success({
+          title: 'Minecraft',
+          message: 'Lancement du Jeu en cours'
+        });
+      });
+
+      ipc.on("done",(event) => {
+        shadowplay.innerHTML = "Vérification..."
+        });
+
+    </script>
+    <script src="https://kit.fontawesome.com/5770dcb58a.js" crossorigin="anonymous"></script>
+  </body>
+</html>

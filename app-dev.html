@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="asset/toast.css" />
+    <link rel="stylesheet" href="asset/navbar.css" />
+    <script src="asset/toast.js"></script>
+  </head>
+
+  <body>
+  <div class="navbar-vertical">
+    <img src="asset/logow.png">
+    <br>
+    <div class="navbar-content-vert">
+      <a class="selectpage" href="./app-dev.html">
+        <div class="link-navbar">
+          <p>Accueil</p>
+        </div></a>
+
+      <a class="selectpage" href="">
+          <div class="link-navbar">
+            <p>News</p>
+          </div></a>
+
+      <a class="selectpage" href="">
+            <div class="link-navbar">
+              <p>Boutique</p>
+            </div></a>
+
+    </div>
+  </div>
+</div>  
+  <nav class="navbar-horizontal">
+            <div class="navbar-hor-text">
+            <p class="text-nav-hor">Mon compte</p>
+            <img src="asset/img/profil/default.png">
+            </div>
+  </nav>
+
+  <div class="content-home">  
+    <a href="./shadow-home.html">
+    <div class="choosing-server">
+      <img src="asset/asset/img/shadow_img.png">
+      <p>Shadow Pix</p>
+    </div>
+  </a>
+
+    <div class="choosing-server">
+      <img src="asset/asset/img/thegamerserv.png">
+      <p>The Gamer serv</p>
+    </div>
+
+    <div class="choosing-server">
+      <img src="asset/asset/img/plus.png">
+      <p>Plus à venir</p>
+    </div>
+
+
+  </div>
+
+    <style>
+      body {
+        overflow-x: hidden;
+        margin: 0;
+background: #333333;
+
+font-family: "Roboto", sans-serif;
+}
+
+      
+    </style>
+    <script>
+      
+      const ipc = require("electron").ipcRenderer;
+
+      ipc.on("user",(event, user) => {
+          localStorage.setItem("user", JSON.stringify(user));
+          iziToast.success({
+          title: "Connecter",
+          message: 'Bienvenue ' + user.name,
+          position: "bottomRight",
+          transitionIn: "fadeInDown",
+        });
+        });
+
+
+      
+    </script>
+    <script src="https://kit.fontawesome.com/5770dcb58a.js" crossorigin="anonymous"></script>
+  </body>
+</html>
